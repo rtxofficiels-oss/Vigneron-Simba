@@ -93,13 +93,19 @@
         .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
         .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
 
-        /* GRILLE DE PRODUITS - CORRECTIONS APPLIQUÉES ICI */
+        /* GRILLE DE PRODUITS */
         .products-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 5rem 3rem; 
         }
-        .product-card { text-align: center; position: relative; }
+        .product-card { text-align: center; position: relative; transition: opacity 0.4s ease, transform 0.4s ease; }
+        
+        /* Style pour masquer les produits filtrés */
+        .product-card.hidden {
+            display: none;
+        }
+
         .product-image-box {
             background: #f7f7f5;
             height: 450px;
@@ -110,13 +116,13 @@
             display: flex; 
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Empêche l'image de dépasser */
-            padding: 0; /* Suppression du padding pour un remplissage total */
+            overflow: hidden;
+            padding: 0;
         }
         .product-image-box img { 
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Remplit le cadre sans déformer */
+            object-fit: cover;
             filter: brightness(0.9);
             transition: 0.6s;
         }
@@ -133,7 +139,7 @@
         }
         .product-price { font-size: 1.1rem; font-weight: 400; color: #555; }
 
-        /* CONTACT STYLE MATTERI */
+        /* CONTACT STYLE */
         .contact-container {
             background: white;
             padding: 100px 5%;
@@ -198,15 +204,15 @@
         <div class="cave-header reveal">
             <h2>Nos Alcools & Vins</h2>
             <div class="filter-nav">
-                <span class="active">Tous les produits</span>
-                <span>Vins Rouges</span>
-                <span>Vins Blancs</span>
-                <span>Spiritueux</span>
+                <span class="active" data-filter="all">Tous les produits</span>
+                <span data-filter="rouge">Vins Rouges</span>
+                <span data-filter="blanc">Vins Blancs</span>
+                <span data-filter="spiritueux">Spiritueux</span>
             </div>
         </div>
 
         <div class="products-grid">
-            <div class="product-card reveal">
+            <div class="product-card reveal" data-category="rouge">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Vin Rouge">
                 </div>
@@ -217,9 +223,9 @@
                 </div>
             </div>
 
-            <div class="product-card reveal">
+            <div class="product-card reveal" data-category="blanc">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Vin Blanc">
+                    <img src="https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?q=80&w=1170&auto=format&fit=crop" alt="Vin Blanc">
                 </div>
                 <div class="product-info">
                     <span class="product-type">Minéral • Millésime</span>
@@ -228,9 +234,9 @@
                 </div>
             </div>
 
-            <div class="product-card reveal">
+            <div class="product-card reveal" data-category="spiritueux">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1688667321074-1c50cecf49cb?q=80&w=705&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <img src="https://images.unsplash.com/photo-1688667321074-1c50cecf49cb?q=80&w=705&auto=format&fit=crop" alt="Spiritueux">
                 </div>
                 <div class="product-info">
                     <span class="product-type">Cognac • Hors d'âge</span>
@@ -239,9 +245,9 @@
                 </div>
             </div>
 
-            <div class="product-card reveal">
+            <div class="product-card reveal" data-category="rouge">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1589816502378-fe5f8031ce64?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Rosé">
+                    <img src="https://images.unsplash.com/photo-1589816502378-fe5f8031ce64?q=80&w=687&auto=format&fit=crop" alt="Rosé">
                 </div>
                 <div class="product-info">
                     <span class="product-type">Gourmand • Frais</span>
@@ -293,6 +299,7 @@
     </footer>
 
     <script>
+        // SCRIPT POUR LE REVEAL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -306,6 +313,30 @@
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
+
+        // --- NOUVEAU SCRIPT POUR LE FILTRAGE DES PRODUITS ---
+        const filterButtons = document.querySelectorAll('.filter-nav span');
+        const products = document.querySelectorAll('.product-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Change la classe active sur les boutons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                products.forEach(product => {
+                    if (filterValue === 'all' || product.getAttribute('data-category') === filterValue) {
+                        product.classList.remove('hidden');
+                        // On force le reveal si le produit était caché
+                        setTimeout(() => product.classList.add('active'), 100);
+                    } else {
+                        product.classList.add('hidden');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

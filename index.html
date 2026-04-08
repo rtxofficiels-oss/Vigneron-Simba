@@ -93,7 +93,7 @@
         .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
         .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
 
-        /* GRILLE DE PRODUITS */
+        /* GRILLE DE PRODUITS - CADRAGE CORRIGÉ */
         .products-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -102,15 +102,20 @@
         .product-card { text-align: center; position: relative; }
         .product-image-box {
             background: #f7f7f5;
-            padding: 60px 20px;
+            height: 450px;
             margin-bottom: 30px;
             border-radius: 2px;
             transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             cursor: pointer;
-            display: flex; justify-content: center;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
         }
         .product-image-box img { 
-            height: 450px; 
+            max-height: 100%;
+            max-width: 100%;
             object-fit: contain; 
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
             transition: 0.6s;
@@ -288,7 +293,6 @@
     </footer>
 
     <script>
-        // Gestion de l'animation au scroll
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -301,7 +305,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        window.addEventListener("load", reveal); // Pour animer le hero dès le départ
+        window.addEventListener("load", reveal);
     </script>
 </body>
 </html>

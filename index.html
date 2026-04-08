@@ -240,8 +240,8 @@
             justify-content: center; gap: 2rem; margin-bottom: 50px;
             text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;
         }
-        .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
-        .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
+        .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 2px solid transparent; }
+        .filter-nav span.active { color: var(--matteri-wine); border-bottom: 2px solid var(--matteri-wine); }
 
         .products-grid { 
             display: grid; 
@@ -700,6 +700,12 @@
         function filterByCat(cat) {
             catSelector.style.display = 'none'; 
             filterNav.style.display = 'flex'; 
+            
+            // AJOUT : Met à jour le soulignement (classe 'active')
+            document.querySelectorAll('.filter-nav span[data-filter]').forEach(s => s.classList.remove('active'));
+            const activeLink = document.querySelector(`.filter-nav span[data-filter="${cat}"]`);
+            if(activeLink) activeLink.classList.add('active');
+
             products.forEach(p => {
                 if (p.getAttribute('data-category') === cat) p.classList.add('visible');
                 else p.classList.remove('visible');

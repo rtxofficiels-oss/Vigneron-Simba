@@ -23,6 +23,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* NAVBAR TRANSULCIDE PUIS BLANCHE */
         header { 
             position: fixed; top: 0; width: 100%; 
             background: white; 
@@ -49,10 +50,11 @@
         }
         .nav-links a:hover { color: var(--matteri-gold); }
 
+        /* HERO - IMAGE DE FOND ÉCRAN TOTAL */
         .hero { 
             height: 100vh; 
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=2000&auto=format&fit=crop');
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?q=80&w=2000&auto=format&fit=crop');
             background-size: cover; 
             background-position: center; 
             display: flex; align-items: center; justify-content: center; 
@@ -61,12 +63,11 @@
         }
         .hero-content h1 { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(3rem, 10vw, 6rem); font-weight: 300; 
-            line-height: 1.1; margin-bottom: 2rem;
+            font-size: clamp(3rem, 12vw, 7rem); font-weight: 300; 
+            line-height: 1; margin-bottom: 2rem;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
         .btn-discover {
-            display: inline-block;
             padding: 1.2rem 3rem;
             border: 1px solid white;
             color: white;
@@ -78,6 +79,7 @@
         }
         .btn-discover:hover { background: white; color: black; }
 
+        /* SECTION CAVE / PRODUITS */
         .cave-section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
         .cave-header { text-align: center; margin-bottom: 80px; }
         .cave-header h2 { 
@@ -91,28 +93,35 @@
         .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
         .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
 
+        /* GRILLE DE PRODUITS - CADRAGE CORRIGÉ */
         .products-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 5rem 3rem; 
         }
-        .product-card { text-align: center; }
+        .product-card { text-align: center; position: relative; }
         .product-image-box {
             background: #f7f7f5;
             height: 450px;
             margin-bottom: 30px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
+            border-radius: 2px;
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            display: flex; 
             justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
         }
         .product-image-box img { 
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain; 
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            transition: 0.6s;
         }
-        .product-card:hover img { transform: scale(1.05); }
+        .product-card:hover .product-image-box { background: #efefed; }
+        .product-card:hover img { transform: scale(1.08) translateY(-10px); }
         
         .product-info h3 { 
             font-family: 'Cormorant Garamond', serif; 
@@ -124,10 +133,11 @@
         }
         .product-price { font-size: 1.1rem; font-weight: 400; color: #555; }
 
+        /* CONTACT STYLE MATTERI */
         .contact-container {
             background: white;
             padding: 100px 5%;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
             max-width: 1400px; margin: 0 auto;
         }
         .contact-info h2 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 30px; }
@@ -143,8 +153,7 @@
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
             color: #999; pointer-events: none; transition: 0.3s;
         }
-        input:focus + label, input:not(:placeholder-shown) + label,
-        textarea:focus + label, textarea:not(:placeholder-shown) + label {
+        input:focus + label, input:not(:placeholder-shown) + label {
             top: -15px; font-size: 0.6rem; color: var(--matteri-wine);
         }
 
@@ -154,11 +163,12 @@
         .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; letter-spacing: 5px; margin-bottom: 40px; display: block; }
         .legal { font-size: 0.65rem; color: #555; margin-top: 50px; text-transform: uppercase; letter-spacing: 1px; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        /* REVEAL ON SCROLL */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 900px) {
-            .contact-container { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; gap: 50px; }
             .nav-links { display: none; }
         }
     </style>
@@ -178,9 +188,9 @@
     </header>
 
     <section id="accueil" class="hero">
-        <div class="hero-content reveal">
-            <h1>Domaine de l'Excellence</h1>
-            <a href="#la-cave" class="btn-discover">Explorer la cave</a>
+        <div class="hero-content">
+            <h1 class="reveal">Domaine de<br>l'Excellence</h1>
+            <a href="#la-cave" class="btn-discover reveal">Explorer la cave</a>
         </div>
     </section>
 
@@ -209,7 +219,7 @@
 
             <div class="product-card reveal">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1559152930-188730873644?q=80&w=800&auto=format&fit=crop" alt="Vin Blanc">
+                    <img src="https://images.unsplash.com/photo-1553184658-4448514a946e?q=80&w=800&auto=format&fit=crop" alt="Vin Blanc">
                 </div>
                 <div class="product-info">
                     <span class="product-type">Minéral • Millésime</span>
@@ -231,7 +241,7 @@
 
             <div class="product-card reveal">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1558001256-02d91b33473f?q=80&w=800&auto=format&fit=crop" alt="Rosé">
+                    <img src="https://images.unsplash.com/photo-1566754436893-983a4789439b?q=80&w=800&auto=format&fit=crop" alt="Rosé">
                 </div>
                 <div class="product-info">
                     <span class="product-type">Gourmand • Frais</span>
@@ -245,10 +255,10 @@
     <section id="contact" style="background: white;">
         <div class="contact-container reveal">
             <div class="contact-info">
-                <h2>Nous rendre visite</h2>
+                <h2>Nous rendre<br>visite au Domaine</h2>
                 <p style="color: #666; margin-bottom: 40px; font-weight: 300; line-height: 2;">
                     Vignoble de 45 hectares situé au coeur de la région.<br>
-                    Ouvert du Lundi au Vendredi.<br><br>
+                    Ouvert du Lundi au Vendredi pour des dégustations.<br><br>
                     12 Route des Grands Crus, Bordeaux<br>
                     contact@maisonvigneron.fr
                 </p>
@@ -260,15 +270,15 @@
 
             <form>
                 <div class="form-row">
-                    <input type="text" id="name" placeholder=" " required>
+                    <input type="text" id="name" placeholder=" ">
                     <label for="name">Nom complet</label>
                 </div>
                 <div class="form-row">
-                    <input type="email" id="email" placeholder=" " required>
+                    <input type="email" id="email" placeholder=" ">
                     <label for="email">Adresse Email</label>
                 </div>
                 <div class="form-row">
-                    <textarea id="msg" rows="4" placeholder=" " required></textarea>
+                    <textarea id="msg" rows="4" placeholder=" "></textarea>
                     <label for="msg">Votre message</label>
                 </div>
                 <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>

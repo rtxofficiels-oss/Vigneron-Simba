@@ -31,6 +31,7 @@
             background-color: var(--bg-site); 
             color: var(--text);
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         header { 
@@ -50,7 +51,7 @@
             color: var(--matteri-wine); 
             text-decoration: none; text-transform: uppercase; letter-spacing: 3px;
         }
-        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center;}
         .nav-links a { 
             color: var(--text); text-decoration: none; 
             font-size: 0.75rem; font-weight: 500; 
@@ -59,6 +60,93 @@
         }
         .nav-links a:hover { color: var(--matteri-gold); }
 
+        /* PANIER ICON */
+        .cart-icon-wrapper {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--matteri-wine);
+        }
+        #cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--matteri-gold);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* SIDE CART PANEL */
+        .side-cart {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            z-index: 3000;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 30px;
+        }
+        .side-cart.open { right: 0; }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .cart-header h2 { font-family: 'Cormorant Garamond', serif; text-transform: uppercase; letter-spacing: 2px; }
+        .close-cart { cursor: pointer; font-size: 1.2rem; }
+
+        .cart-items { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f9f9f9;
+        }
+        .item-info h4 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
+        .item-info p { font-size: 0.75rem; color: var(--matteri-gold); }
+        .item-qty { display: flex; align-items: center; gap: 10px; }
+        .qty-btn { cursor: pointer; width: 20px; height: 20px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+
+        .cart-footer { border-top: 1px solid #eee; padding-top: 20px; }
+        .cart-total { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 20px; }
+        .btn-checkout {
+            width: 100%;
+            padding: 15px;
+            background: var(--matteri-wine);
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-checkout:hover { background: black; }
+
+        /* OVERLAY */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: none;
+            z-index: 2900;
+        }
+        .overlay.active { display: block; }
+
+        /* RESTE DU STYLE ORIGINAL */
         .hero { 
             height: 100vh; 
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), 
@@ -164,7 +252,6 @@
         }
         .product-card:hover img { transform: scale(1.05); filter: brightness(1); }
 
-        /* BOUTON AJOUTER */
         .btn-add-cart {
             position: absolute;
             bottom: 20px;
@@ -224,6 +311,7 @@
         @media (max-width: 900px) {
             .category-selector { grid-template-columns: 1fr; }
             .contact-container { grid-template-columns: 1fr; gap: 50px; }
+            .side-cart { width: 100%; right: -100%; }
         }
     </style>
 </head>
@@ -235,11 +323,32 @@
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#la-cave">La Cave</a></li>
-                <li><a href="#histoire">L'Histoire</a></li>
-                <li><a href="#contact">Nous Rejoindre</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="cart-icon-wrapper" onclick="toggleCart()">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span id="cart-count">0</span>
+                </li>
             </ul>
         </nav>
     </header>
+
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="side-cart" id="sideCart">
+        <div class="cart-header">
+            <h2>Votre Panier</h2>
+            <div class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; color: #999; margin-top: 50px;">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="totalPrice">0,00 $</span>
+            </div>
+            <button class="btn-checkout" onclick="validerCommande()">Passer la commande</button>
+        </div>
+    </div>
 
     <section id="accueil" class="hero">
         <div class="hero-content">
@@ -251,7 +360,6 @@
     <section id="la-cave" class="cave-section">
         <div class="cave-header reveal">
             <h2>La Collection</h2>
-            
             <div class="category-selector" id="catSelector">
                 <div class="cat-card" onclick="filterByCat('rouge')">
                     <img src="https://plus.unsplash.com/premium_photo-1676590905408-62528b108071?q=80&w=665&auto=format&fit=crop" alt="Rouge">
@@ -268,7 +376,7 @@
             </div>
 
             <div class="filter-nav" id="filterNav">
-                <span onclick="resetGallery()">← Retour aux catégories</span>
+                <span onclick="resetGallery()">← Retour</span>
                 <span data-filter="rouge">Rouges</span>
                 <span data-filter="blanc">Blancs</span>
                 <span data-filter="spiritueux">Spiritueux</span>
@@ -279,7 +387,7 @@
             <div class="product-card" data-category="rouge">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1714377676594-72f25dc96b2e?q=80&w=687" alt="Vin Rouge">
-                    <div class="btn-add-cart" onclick="commander('Le Grand Rouge', '42,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                    <div class="btn-add-cart" onclick="addToCart('Le Grand Rouge', 42)">Ajouter <i class="fas fa-plus"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Cuvée Tradition • 2021</span>
@@ -290,7 +398,7 @@
             <div class="product-card" data-category="rouge">
                 <div class="product-image-box">
                     <img src="https://plus.unsplash.com/premium_photo-1676590905512-13824f60092a?w=500" alt="Vin Rouge">
-                    <div class="btn-add-cart" onclick="commander('Château des Lys', '58,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                    <div class="btn-add-cart" onclick="addToCart('Château des Lys', 58)">Ajouter <i class="fas fa-plus"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Réserve Spéciale • 2018</span>
@@ -298,22 +406,11 @@
                     <p class="product-price">58,00 $</p>
                 </div>
             </div>
-            <div class="product-card" data-category="rouge">
-                <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=800" alt="Vin Rouge">
-                    <div class="btn-add-cart" onclick="commander('L\'Âme du Terroir', '34,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
-                </div>
-                <div class="product-info">
-                    <span class="product-type">Vignoble d'Exception • 2020</span>
-                    <h3>L'Âme du Terroir</h3>
-                    <p class="product-price">34,00 $</p>
-                </div>
-            </div>
 
             <div class="product-card" data-category="blanc">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?q=80&w=1170" alt="Vin Blanc">
-                    <div class="btn-add-cart" onclick="commander('Blanc de Blancs', '35,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                    <div class="btn-add-cart" onclick="addToCart('Blanc de Blancs', 35)">Ajouter <i class="fas fa-plus"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Minéral • Millésime</span>
@@ -321,60 +418,16 @@
                     <p class="product-price">35,00 $</p>
                 </div>
             </div>
-            <div class="product-card" data-category="blanc">
-                <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1595511690771-476d00d95d42?q=80&w=1119" alt="Vin Blanc">
-                    <div class="btn-add-cart" onclick="commander('Chardonnay Prestige', '29,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
-                </div>
-                <div class="product-info">
-                    <span class="product-type">Floral • Fruité</span>
-                    <h3>Chardonnay Prestige</h3>
-                    <p class="product-price">29,00 $</p>
-                </div>
-            </div>
-            <div class="product-card" data-category="blanc">
-                <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1710001582783-b4180273049a?q=80&w=687" alt="Vin Blanc">
-                    <div class="btn-add-cart" onclick="commander('Éclat du Matin', '24,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
-                </div>
-                <div class="product-info">
-                    <span class="product-type">Sauvignon • Sec</span>
-                    <h3>Éclat du Matin</h3>
-                    <p class="product-price">24,00 $</p>
-                </div>
-            </div>
 
             <div class="product-card" data-category="spiritueux">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1688667321074-1c50cecf49cb?q=80&w=705" alt="Spiritueux">
-                    <div class="btn-add-cart" onclick="commander('L\'Élixir du Fondateur', '125,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                    <div class="btn-add-cart" onclick="addToCart('L\'Élixir du Fondateur', 125)">Ajouter <i class="fas fa-plus"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Cognac • Hors d'âge</span>
                     <h3>L'Élixir du Fondateur</h3>
                     <p class="product-price">125,00 $</p>
-                </div>
-            </div>
-            <div class="product-card" data-category="spiritueux">
-                <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1709122066730-d9f459fc2433?q=80&w=736" alt="Spiritueux">
-                    <div class="btn-add-cart" onclick="commander('Whisky des Landes', '85,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
-                </div>
-                <div class="product-info">
-                    <span class="product-type">Single Malt • 12 ans</span>
-                    <h3>Whisky des Landes</h3>
-                    <p class="product-price">85,00 $</p>
-                </div>
-            </div>
-            <div class="product-card" data-category="spiritueux">
-                <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1614313511387-1436a4480ebb?q=80&w=800" alt="Spiritueux">
-                    <div class="btn-add-cart" onclick="commander('Le Gin du Domaine', '49,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
-                </div>
-                <div class="product-info">
-                    <span class="product-type">Gin Artisanal • Botanique</span>
-                    <h3>Le Gin du Domaine</h3>
-                    <p class="product-price">49,00 $</p>
                 </div>
             </div>
         </div>
@@ -399,14 +452,6 @@
                     <input type="email" id="email" placeholder=" " required>
                     <label for="email">Adresse Email</label>
                 </div>
-                <div class="form-row">
-                    <input type="text" id="numero" placeholder=" " required>
-                    <label for="numero">numéro de téléphone ig</label>
-                </div>
-                <div class="form-row">
-                    <input type="text" id="raison" placeholder=" ">
-                    <label for="raison">informations complémentaires</label>
-                </div>
                 <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
             </form>
         </div>
@@ -418,20 +463,112 @@
     </footer>
 
     <script>
-        // URL WEBHOOK DISCORD - À REMPLIR
-        const WEBHOOK_URL = "TON_LIEN_WEBHOOK_ICI";
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1491483454288826440/qZ5bHMBQzLEMfGyQQkXOlw_R7Dpu0odls6XhuYJ8gNE-gj2kDGcqaCLxkYppXrX2IuC8";
+        let cart = [];
 
-        // Désactiver le clic droit
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        // UI Toggle Panier
+        function toggleCart() {
+            document.getElementById('sideCart').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
 
+        // Ajouter au panier
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+            if(!document.getElementById('sideCart').classList.contains('open')) toggleCart();
+        }
+
+        // Gérer quantité
+        function changeQty(name, delta) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Update UI
+        function updateCartUI() {
+            const container = document.getElementById('cartItems');
+            const countBadge = document.getElementById('cart-count');
+            const totalDisplay = document.getElementById('totalPrice');
+            
+            container.innerHTML = '';
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #999; margin-top: 50px;">Votre panier est vide</p>';
+            }
+
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                count += item.qty;
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <h4>${item.name}</h4>
+                            <p>${item.price},00 $</p>
+                        </div>
+                        <div class="item-qty">
+                            <div class="qty-btn" onclick="changeQty('${item.name}', -1)">-</div>
+                            <span>${item.qty}</span>
+                            <div class="qty-btn" onclick="changeQty('${item.name}', 1)">+</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            countBadge.innerText = count;
+            totalDisplay.innerText = total.toFixed(2) + ' $';
+        }
+
+        // Envoyer commande Discord
+        function validerCommande() {
+            if (cart.length === 0) return alert("Le panier est vide !");
+
+            let itemsTxt = cart.map(i => `- **${i.name}** (x${i.qty}) : ${i.price * i.qty}$`).join('\n');
+            let totalTxt = document.getElementById('totalPrice').innerText;
+
+            const data = {
+                username: "Boutique Maison Vigneron",
+                embeds: [{
+                    title: "🛒 Nouvelle Commande Panier",
+                    color: 4853262,
+                    description: itemsTxt,
+                    fields: [{ name: "Total", value: `**${totalTxt}**` }],
+                    footer: { text: "Commande à traiter" }
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert("Commande envoyée avec succès !");
+                cart = [];
+                updateCartUI();
+                toggleCart();
+            });
+        }
+
+        // LOGIQUE ORIGINALE FILTRES
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
             }
         }
         window.addEventListener("scroll", reveal);
@@ -444,82 +581,20 @@
         function filterByCat(cat) {
             catSelector.style.display = 'none'; 
             filterNav.style.display = 'flex'; 
-            
-            document.querySelectorAll('.filter-nav span').forEach(span => {
-                if(span.getAttribute('data-filter') === cat) span.classList.add('active');
-                else span.classList.remove('active');
-            });
-
-            products.forEach(product => {
-                if (product.getAttribute('data-category') === cat) {
-                    product.classList.add('visible');
-                } else {
-                    product.classList.remove('visible');
-                }
+            products.forEach(p => {
+                if (p.getAttribute('data-category') === cat) p.classList.add('visible');
+                else p.classList.remove('visible');
             });
         }
 
         function resetGallery() {
             catSelector.style.display = 'grid';
             filterNav.style.display = 'none';
-            products.forEach(product => {
-                product.classList.remove('visible');
-            });
+            products.forEach(p => p.classList.remove('visible'));
         }
-
-        // FONCTION ENVOI DISCORD (BOUTON AJOUTER)
-        function commander(nomProduit, prixProduit) {
-            const data = {
-                username: "Boutique Maison Vigneron",
-                embeds: [{
-                    title: "🛒 Nouvelle Commande Directe",
-                    color: 4853262,
-                    fields: [
-                        { name: "Produit", value: nomProduit, inline: true },
-                        { name: "Prix", value: prixProduit, inline: true }
-                    ],
-                    footer: { text: "Passer commande" }
-                }]
-            };
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(() => alert("Votre intérêt pour " + nomProduit + " a été envoyé !"));
-        }
-
-        // ENVOI FORMULAIRE CONTACT DISCORD
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const data = {
-                username: "Contact Maison Vigneron",
-                embeds: [{
-                    title: "✉️ Nouveau Message de Contact",
-                    color: 11768682,
-                    fields: [
-                        { name: "Nom", value: document.getElementById('name').value },
-                        { name: "Email", value: document.getElementById('email').value },
-                        { name: "Téléphone", value: document.getElementById('numero').value },
-                        { name: "Infos", value: document.getElementById('raison').value || "Aucune" }
-                    ]
-                }]
-            };
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(() => {
-                alert("Message envoyé !");
-                this.reset();
-            });
-        });
 
         document.querySelectorAll('.filter-nav span[data-filter]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterByCat(btn.getAttribute('data-filter'));
-            });
+            btn.addEventListener('click', () => filterByCat(btn.getAttribute('data-filter')));
         });
     </script>
 </body>

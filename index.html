@@ -23,7 +23,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* NAVBAR TRANSULCIDE PUIS BLANCHE */
         header { 
             position: fixed; top: 0; width: 100%; 
             background: white; 
@@ -50,7 +49,6 @@
         }
         .nav-links a:hover { color: var(--matteri-gold); }
 
-        /* HERO - IMAGE DE FOND ÉCRAN TOTAL */
         .hero { 
             height: 100vh; 
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), 
@@ -79,7 +77,6 @@
         }
         .btn-discover:hover { background: white; color: black; }
 
-        /* SECTION CAVE / PRODUITS */
         .cave-section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
         .cave-header { text-align: center; margin-bottom: 80px; }
         .cave-header h2 { 
@@ -93,7 +90,6 @@
         .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
         .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
 
-        /* GRILLE DE PRODUITS */
         .products-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -101,10 +97,7 @@
         }
         .product-card { text-align: center; position: relative; transition: opacity 0.4s ease, transform 0.4s ease; }
         
-        /* Style pour masquer les produits filtrés */
-        .product-card.hidden {
-            display: none;
-        }
+        .product-card.hidden { display: none; }
 
         .product-image-box {
             background: #f7f7f5;
@@ -139,7 +132,6 @@
         }
         .product-price { font-size: 1.1rem; font-weight: 400; color: #555; }
 
-        /* CONTACT STYLE */
         .contact-container {
             background: white;
             padding: 100px 5%;
@@ -169,7 +161,6 @@
         .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; letter-spacing: 5px; margin-bottom: 40px; display: block; }
         .legal { font-size: 0.65rem; color: #555; margin-top: 50px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* REVEAL ON SCROLL */
         .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -223,6 +214,28 @@
                 </div>
             </div>
 
+            <div class="product-card reveal" data-category="rouge">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1553361371-9bb220265263?q=80&w=800&auto=format&fit=crop" alt="Vin Rouge">
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Réserve • 2019</span>
+                    <h3>Château Noir</h3>
+                    <p class="product-price">55,00 €</p>
+                </div>
+            </div>
+
+            <div class="product-card reveal" data-category="rouge">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1589816502378-fe5f8031ce64?q=80&w=687&auto=format&fit=crop" alt="Rosé">
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Gourmand • Frais</span>
+                    <h3>Rosé d'Été</h3>
+                    <p class="product-price">18,00 €</p>
+                </div>
+            </div>
+
             <div class="product-card reveal" data-category="blanc">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?q=80&w=1170&auto=format&fit=crop" alt="Vin Blanc">
@@ -231,6 +244,28 @@
                     <span class="product-type">Minéral • Millésime</span>
                     <h3>Blanc de Blancs</h3>
                     <p class="product-price">35,00 €</p>
+                </div>
+            </div>
+
+            <div class="product-card reveal" data-category="blanc">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1566311681755-90f9689e2468?q=80&w=800&auto=format&fit=crop" alt="Vin Blanc">
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Floral • Fruité</span>
+                    <h3>Chardonnay Prestige</h3>
+                    <p class="product-price">29,00 €</p>
+                </div>
+            </div>
+
+            <div class="product-card reveal" data-category="blanc">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=800&auto=format&fit=crop" alt="Vin Blanc">
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Moelleux • Doux</span>
+                    <h3>Sauternes d'Or</h3>
+                    <p class="product-price">48,00 €</p>
                 </div>
             </div>
 
@@ -245,14 +280,25 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" data-category="rouge">
+            <div class="product-card reveal" data-category="spiritueux">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1589816502378-fe5f8031ce64?q=80&w=687&auto=format&fit=crop" alt="Rosé">
+                    <img src="https://images.unsplash.com/photo-1514218953589-2d7d37efd2ec?q=80&w=800&auto=format&fit=crop" alt="Whisky">
                 </div>
                 <div class="product-info">
-                    <span class="product-type">Gourmand • Frais</span>
-                    <h3>Rosé d'Été</h3>
-                    <p class="product-price">18,00 €</p>
+                    <span class="product-type">Single Malt • 12 ans</span>
+                    <h3>Whisky des Landes</h3>
+                    <p class="product-price">85,00 €</p>
+                </div>
+            </div>
+
+            <div class="product-card reveal" data-category="spiritueux">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1569158062127-9b1745138758?q=80&w=800&auto=format&fit=crop" alt="Gin">
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Botanique • Artisanal</span>
+                    <h3>Gin Botanique</h3>
+                    <p class="product-price">45,00 €</p>
                 </div>
             </div>
         </div>
@@ -299,7 +345,6 @@
     </footer>
 
     <script>
-        // SCRIPT POUR LE REVEAL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -314,13 +359,11 @@
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
-        // --- NOUVEAU SCRIPT POUR LE FILTRAGE DES PRODUITS ---
         const filterButtons = document.querySelectorAll('.filter-nav span');
         const products = document.querySelectorAll('.product-card');
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Change la classe active sur les boutons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
@@ -329,7 +372,6 @@
                 products.forEach(product => {
                     if (filterValue === 'all' || product.getAttribute('data-category') === filterValue) {
                         product.classList.remove('hidden');
-                        // On force le reveal si le produit était caché
                         setTimeout(() => product.classList.add('active'), 100);
                     } else {
                         product.classList.add('hidden');

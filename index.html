@@ -14,51 +14,164 @@
             --text: #222;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-site); color: var(--text); -webkit-font-smoothing: antialiased; }
+        /* Désactivation de la sélection de texte */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            user-select: none; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+        }
 
-        header { position: fixed; top: 0; width: 100%; background: white; z-index: 2000; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--matteri-wine); text-decoration: none; text-transform: uppercase; letter-spacing: 3px; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg-site); 
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header { 
+            position: fixed; top: 0; width: 100%; 
+            background: white; 
+            z-index: 2000; 
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        nav { 
+            max-width: 1400px; margin: 0 auto; 
+            display: flex; justify-content: space-between; 
+            align-items: center; padding: 1.2rem 5%; 
+        }
+        .logo { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.6rem; font-weight: 600; 
+            color: var(--matteri-wine); 
+            text-decoration: none; text-transform: uppercase; letter-spacing: 3px;
+        }
         .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .nav-links a { 
+            color: var(--text); text-decoration: none; 
+            font-size: 0.75rem; font-weight: 500; 
+            text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s;
+        }
         .nav-links a:hover { color: var(--matteri-gold); }
 
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 0 5%; }
-        .hero-content h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 12vw, 7rem); font-weight: 300; line-height: 1; margin-bottom: 2rem; }
-        .btn-discover { padding: 1.2rem 3rem; border: 1px solid white; color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; transition: 0.5s ease; cursor: pointer; background: transparent; }
+        .hero { 
+            height: 100vh; 
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover; 
+            background-position: center; 
+            display: flex; align-items: center; justify-content: center; 
+            text-align: center; color: white;
+            padding: 0 5%;
+        }
+        .hero-content h1 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: clamp(3rem, 12vw, 7rem); font-weight: 300; 
+            line-height: 1; margin-bottom: 2rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        .btn-discover {
+            padding: 1.2rem 3rem;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            transition: 0.5s ease;
+            background: transparent;
+            cursor: pointer;
+        }
         .btn-discover:hover { background: white; color: black; }
 
         .cave-section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; min-height: 800px; }
         .cave-header { text-align: center; margin-bottom: 60px; }
-        .cave-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 400; }
+        .cave-header h2 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 3.5rem; font-weight: 400; margin-bottom: 1rem;
+        }
 
-        .category-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-        .cat-card { position: relative; height: 400px; cursor: pointer; overflow: hidden; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: 0.5s ease; }
-        .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; filter: brightness(0.7); }
-        .cat-card h3 { position: absolute; color: white; font-family: 'Cormorant Garamond', serif; font-size: 2rem; text-transform: uppercase; letter-spacing: 3px; z-index: 2; }
+        .category-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .cat-card {
+            position: relative;
+            height: 400px;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s ease;
+        }
+        .cat-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.8s ease;
+            filter: brightness(0.7);
+        }
+        .cat-card h3 {
+            position: absolute;
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            z-index: 2;
+        }
         .cat-card:hover img { transform: scale(1.1); filter: brightness(0.9); }
+        .cat-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
-        .filter-nav { display: none; justify-content: center; gap: 2rem; margin-bottom: 50px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; }
-        .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; }
+        .filter-nav { 
+            display: none; 
+            justify-content: center; gap: 2rem; margin-bottom: 50px;
+            text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;
+        }
+        .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
         .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem 3rem; }
-        .product-card { text-align: center; position: relative; display: none; }
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 5rem 3rem; 
+        }
+        
+        .product-card { text-align: center; position: relative; transition: 0.4s ease; display: none; }
         .product-card.visible { display: block; }
 
-        .product-image-box { background: #f7f7f5; height: 450px; margin-bottom: 30px; position: relative; overflow: hidden; }
-        .product-image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        
-        /* Nouveau bouton d'ajout */
-        .add-to-cart-btn {
+        .product-image-box {
+            background: #f7f7f5;
+            height: 450px;
+            margin-bottom: 30px;
+            border-radius: 2px;
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        .product-image-box img { 
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.9); transition: 0.6s;
+        }
+        .product-card:hover img { transform: scale(1.05); filter: brightness(1); }
+
+        /* BOUTON AJOUTER */
+        .btn-add-cart {
             position: absolute;
             bottom: 20px;
             right: 20px;
             background: white;
             color: var(--matteri-wine);
-            padding: 10px 15px;
+            padding: 12px 20px;
             border-radius: 50px;
             font-size: 0.7rem;
             font-weight: 600;
@@ -69,24 +182,49 @@
             gap: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease;
             opacity: 0;
             transform: translateY(10px);
+            z-index: 10;
         }
-        .product-card:hover .add-to-cart-btn { opacity: 1; transform: translateY(0); }
-        .add-to-cart-btn:hover { background: var(--matteri-wine); color: white; }
-
+        .product-card:hover .btn-add-cart {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btn-add-cart:hover {
+            background: var(--matteri-wine);
+            color: white;
+        }
+        
         .product-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 500; margin-bottom: 8px; }
         .product-type { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--matteri-gold); margin-bottom: 15px; }
         .product-price { font-size: 1.1rem; font-weight: 400; color: #555; }
 
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .contact-container {
+            background: white; padding: 100px 5%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+            max-width: 1400px; margin: 0 auto;
+        }
+        .contact-info h2 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 30px; }
+        .form-row { position: relative; margin-bottom: 40px; }
+        .form-row input, .form-row textarea {
+            width: 100%; padding: 10px 0; border: none; border-bottom: 1px solid #ddd;
+            background: transparent; outline: none; font-family: inherit; font-size: 0.9rem;
+        }
+        .form-row label { position: absolute; top: 10px; left: 0; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #999; pointer-events: none; transition: 0.3s; }
+        .form-row input:focus ~ label, .form-row input:not(:placeholder-shown) ~ label { top: -15px; font-size: 0.6rem; color: var(--matteri-gold); }
 
         footer { background: #111; color: white; padding: 80px 5% 40px; text-align: center; }
-        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; letter-spacing: 5px; }
+        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; letter-spacing: 5px; margin-bottom: 40px; display: block; }
+        .legal { font-size: 0.65rem; color: #555; margin-top: 50px; text-transform: uppercase; letter-spacing: 1px; }
 
-        @media (max-width: 900px) { .category-selector { grid-template-columns: 1fr; } }
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .category-selector { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; gap: 50px; }
+        }
     </style>
 </head>
 <body>
@@ -97,7 +235,8 @@
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#la-cave">La Cave</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#histoire">L'Histoire</a></li>
+                <li><a href="#contact">Nous Rejoindre</a></li>
             </ul>
         </nav>
     </header>
@@ -115,21 +254,21 @@
             
             <div class="category-selector" id="catSelector">
                 <div class="cat-card" onclick="filterByCat('rouge')">
-                    <img src="https://plus.unsplash.com/premium_photo-1676590905408-62528b108071?q=80&w=665" alt="Rouge">
+                    <img src="https://plus.unsplash.com/premium_photo-1676590905408-62528b108071?q=80&w=665&auto=format&fit=crop" alt="Rouge">
                     <h3>Vins Rouges</h3>
                 </div>
                 <div class="cat-card" onclick="filterByCat('blanc')">
-                    <img src="https://plus.unsplash.com/premium_photo-1719997500757-c536c7cf8f48?q=80&w=736" alt="Blanc">
+                    <img src="https://plus.unsplash.com/premium_photo-1719997500757-c536c7cf8f48?q=80&w=736&auto=format&fit=crop" alt="Blanc">
                     <h3>Vins Blancs</h3>
                 </div>
                 <div class="cat-card" onclick="filterByCat('spiritueux')">
-                    <img src="https://images.unsplash.com/photo-1506027793884-3210664d36aa?q=80&w=687" alt="Spiritueux">
+                    <img src="https://images.unsplash.com/photo-1506027793884-3210664d36aa?q=80&w=687&auto=format&fit=crop" alt="Spiritueux">
                     <h3>Spiritueux</h3>
                 </div>
             </div>
 
             <div class="filter-nav" id="filterNav">
-                <span onclick="resetGallery()">← Retour</span>
+                <span onclick="resetGallery()">← Retour aux catégories</span>
                 <span data-filter="rouge">Rouges</span>
                 <span data-filter="blanc">Blancs</span>
                 <span data-filter="spiritueux">Spiritueux</span>
@@ -140,9 +279,7 @@
             <div class="product-card" data-category="rouge">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1714377676594-72f25dc96b2e?q=80&w=687" alt="Vin Rouge">
-                    <div class="add-to-cart-btn" onclick="sendToDiscord('Le Grand Rouge', '42,00 $')">
-                        Ajouter <i class="fas fa-shopping-basket"></i>
-                    </div>
+                    <div class="btn-add-cart" onclick="commander('Le Grand Rouge', '42,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Cuvée Tradition • 2021</span>
@@ -150,13 +287,33 @@
                     <p class="product-price">42,00 $</p>
                 </div>
             </div>
+            <div class="product-card" data-category="rouge">
+                <div class="product-image-box">
+                    <img src="https://plus.unsplash.com/premium_photo-1676590905512-13824f60092a?w=500" alt="Vin Rouge">
+                    <div class="btn-add-cart" onclick="commander('Château des Lys', '58,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Réserve Spéciale • 2018</span>
+                    <h3>Château des Lys</h3>
+                    <p class="product-price">58,00 $</p>
+                </div>
+            </div>
+            <div class="product-card" data-category="rouge">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=800" alt="Vin Rouge">
+                    <div class="btn-add-cart" onclick="commander('L\'Âme du Terroir', '34,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Vignoble d'Exception • 2020</span>
+                    <h3>L'Âme du Terroir</h3>
+                    <p class="product-price">34,00 $</p>
+                </div>
+            </div>
 
             <div class="product-card" data-category="blanc">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?q=80&w=1170" alt="Vin Blanc">
-                    <div class="add-to-cart-btn" onclick="sendToDiscord('Blanc de Blancs', '35,00 $')">
-                        Ajouter <i class="fas fa-shopping-basket"></i>
-                    </div>
+                    <div class="btn-add-cart" onclick="commander('Blanc de Blancs', '35,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Minéral • Millésime</span>
@@ -164,13 +321,33 @@
                     <p class="product-price">35,00 $</p>
                 </div>
             </div>
+            <div class="product-card" data-category="blanc">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1595511690771-476d00d95d42?q=80&w=1119" alt="Vin Blanc">
+                    <div class="btn-add-cart" onclick="commander('Chardonnay Prestige', '29,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Floral • Fruité</span>
+                    <h3>Chardonnay Prestige</h3>
+                    <p class="product-price">29,00 $</p>
+                </div>
+            </div>
+            <div class="product-card" data-category="blanc">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1710001582783-b4180273049a?q=80&w=687" alt="Vin Blanc">
+                    <div class="btn-add-cart" onclick="commander('Éclat du Matin', '24,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Sauvignon • Sec</span>
+                    <h3>Éclat du Matin</h3>
+                    <p class="product-price">24,00 $</p>
+                </div>
+            </div>
 
             <div class="product-card" data-category="spiritueux">
                 <div class="product-image-box">
                     <img src="https://images.unsplash.com/photo-1688667321074-1c50cecf49cb?q=80&w=705" alt="Spiritueux">
-                    <div class="add-to-cart-btn" onclick="sendToDiscord('L\'Élixir du Fondateur', '125,00 $')">
-                        Ajouter <i class="fas fa-shopping-basket"></i>
-                    </div>
+                    <div class="btn-add-cart" onclick="commander('L\'Élixir du Fondateur', '125,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
                 </div>
                 <div class="product-info">
                     <span class="product-type">Cognac • Hors d'âge</span>
@@ -178,52 +355,88 @@
                     <p class="product-price">125,00 $</p>
                 </div>
             </div>
+            <div class="product-card" data-category="spiritueux">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1709122066730-d9f459fc2433?q=80&w=736" alt="Spiritueux">
+                    <div class="btn-add-cart" onclick="commander('Whisky des Landes', '85,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Single Malt • 12 ans</span>
+                    <h3>Whisky des Landes</h3>
+                    <p class="product-price">85,00 $</p>
+                </div>
+            </div>
+            <div class="product-card" data-category="spiritueux">
+                <div class="product-image-box">
+                    <img src="https://images.unsplash.com/photo-1614313511387-1436a4480ebb?q=80&w=800" alt="Spiritueux">
+                    <div class="btn-add-cart" onclick="commander('Le Gin du Domaine', '49,00 $')">Ajouter <i class="fas fa-shopping-basket"></i></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-type">Gin Artisanal • Botanique</span>
+                    <h3>Le Gin du Domaine</h3>
+                    <p class="product-price">49,00 $</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: white;">
+        <div class="contact-container reveal">
+            <div class="contact-info">
+                <h2>Nous rendre<br>visite au Domaine</h2>
+                <p style="color: #666; margin-bottom: 40px; font-weight: 300; line-height: 2;">
+                    Nom du lieu : Marlowe Vineyards<br>
+                    Adresse : Buen Vino Road, Tongva Hills<br>
+                    Région : Los Santos County, San Andreas<br>
+                </p>
+            </div>
+            <form id="contactForm">
+                <div class="form-row">
+                    <input type="text" id="name" placeholder=" " required>
+                    <label for="name">Nom Prénom</label>
+                </div>
+                <div class="form-row">
+                    <input type="email" id="email" placeholder=" " required>
+                    <label for="email">Adresse Email</label>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="numero" placeholder=" " required>
+                    <label for="numero">numéro de téléphone ig</label>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="raison" placeholder=" ">
+                    <label for="raison">informations complémentaires</label>
+                </div>
+                <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
+            </form>
         </div>
     </section>
 
     <footer>
         <span class="footer-logo">MAISON VIGNERON</span>
-        <p style="font-size: 0.7rem; margin-top: 20px; color: #555;">L'abus d'alcool est dangereux pour la santé.</p>
+        <p class="legal">L'abus d'alcool est dangereux pour la santé.</p>
     </footer>
 
     <script>
-        // CONFIGURATION DISCORD
-        const DISCORD_WEBHOOK_URL = "TON_WEBHOOK_URL"; // <--- METS TON LIEN ICI
+        // URL WEBHOOK DISCORD - À REMPLIR
+        const WEBHOOK_URL = "TON_LIEN_WEBHOOK_ICI";
 
-        async function sendToDiscord(productName, price) {
-            const message = {
-                username: "Boutique Maison Vigneron",
-                embeds: [{
-                    title: "🛒 Nouvelle Commande !",
-                    description: `Un client souhaite commander : **${productName}**`,
-                    color: 4853262, // Couleur bordeaux
-                    fields: [
-                        { name: "Produit", value: productName, inline: true },
-                        { name: "Prix", value: price, inline: true }
-                    ],
-                    timestamp: new Date()
-                }]
-            };
+        // Désactiver le clic droit
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
-            try {
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(message)
-                });
-
-                if (response.ok) {
-                    alert("Commande envoyée ! Nous vous contacterons prochainement.");
-                } else {
-                    alert("Erreur lors de l'envoi. Vérifiez la configuration du Webhook.");
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
                 }
-            } catch (error) {
-                console.error("Erreur:", error);
-                alert("Impossible d'envoyer la commande.");
             }
         }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
 
-        // Système de galerie
         const catSelector = document.getElementById('catSelector');
         const filterNav = document.getElementById('filterNav');
         const products = document.querySelectorAll('.product-card');
@@ -231,27 +444,83 @@
         function filterByCat(cat) {
             catSelector.style.display = 'none'; 
             filterNav.style.display = 'flex'; 
-            products.forEach(p => {
-                if (p.getAttribute('data-category') === cat) p.classList.add('visible');
-                else p.classList.remove('visible');
+            
+            document.querySelectorAll('.filter-nav span').forEach(span => {
+                if(span.getAttribute('data-filter') === cat) span.classList.add('active');
+                else span.classList.remove('active');
+            });
+
+            products.forEach(product => {
+                if (product.getAttribute('data-category') === cat) {
+                    product.classList.add('visible');
+                } else {
+                    product.classList.remove('visible');
+                }
             });
         }
 
         function resetGallery() {
             catSelector.style.display = 'grid';
             filterNav.style.display = 'none';
-            products.forEach(p => p.classList.remove('visible'));
-        }
-
-        // Animations Reveal
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(r => {
-                if (r.getBoundingClientRect().top < window.innerHeight - 100) r.classList.add("active");
+            products.forEach(product => {
+                product.classList.remove('visible');
             });
         }
-        window.addEventListener("scroll", reveal);
-        window.onload = reveal;
+
+        // FONCTION ENVOI DISCORD (BOUTON AJOUTER)
+        function commander(nomProduit, prixProduit) {
+            const data = {
+                username: "Boutique Maison Vigneron",
+                embeds: [{
+                    title: "🛒 Nouvelle Commande Directe",
+                    color: 4853262,
+                    fields: [
+                        { name: "Produit", value: nomProduit, inline: true },
+                        { name: "Prix", value: prixProduit, inline: true }
+                    ],
+                    footer: { text: "Passer commande" }
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => alert("Votre intérêt pour " + nomProduit + " a été envoyé !"));
+        }
+
+        // ENVOI FORMULAIRE CONTACT DISCORD
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = {
+                username: "Contact Maison Vigneron",
+                embeds: [{
+                    title: "✉️ Nouveau Message de Contact",
+                    color: 11768682,
+                    fields: [
+                        { name: "Nom", value: document.getElementById('name').value },
+                        { name: "Email", value: document.getElementById('email').value },
+                        { name: "Téléphone", value: document.getElementById('numero').value },
+                        { name: "Infos", value: document.getElementById('raison').value || "Aucune" }
+                    ]
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert("Message envoyé !");
+                this.reset();
+            });
+        });
+
+        document.querySelectorAll('.filter-nav span[data-filter]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterByCat(btn.getAttribute('data-filter'));
+            });
+        });
     </script>
 </body>
 </html>

@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary-gold: #D4AF37;
             --primary-wine: #8B0000;
@@ -15,202 +16,72 @@
             --light: #f8f5f0;
             --gray: #6b7280;
         }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--dark); overflow-x: hidden; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
-        }
-
-        /* HEADER & NAV */
-        header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-wine);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
+        /* HEADER */
+        header { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--primary-wine); text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-weight: 500; position: relative; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-wine); }
+        
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--primary-wine); transition: 0.3s; }
 
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
+        /* HERO */
+        .hero { 
+            height: 100vh; 
+            background: linear-gradient(rgba(139, 0, 0, 0.4), rgba(26, 26, 26, 0.7)), url('https://images.unsplash.com/photo-1504279589104-dbdf122f236b?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
         }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 1.5rem; }
 
-        .hamburger span {
-            width: 25px; height: 3px;
-            background: var(--primary-wine);
-            border-radius: 3px;
-        }
+        /* ABOUT & STATS */
+        section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4rem); text-align: center; margin-bottom: 4rem; }
+        
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .about-image { height: 500px; border-radius: 20px; background: url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?q=80&w=1000&auto=format&fit=crop') center/cover; }
+        
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+        .stat { text-align: center; padding: 1rem; border-top: 1px solid var(--primary-gold); }
+        .stat-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-wine); font-weight: 700; display: block; }
+        .stat-label { color: var(--gray); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* HERO SECTION */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1504279589104-dbdf122f236b?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 5%;
-        }
+        /* WINES */
+        .wines-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .wine-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: 0.4s; }
+        .wine-card:hover { transform: translateY(-15px); }
+        .wine-image { height: 350px; background-size: cover; background-position: center; position: relative; }
+        .wine-content { padding: 2.5rem; }
+        .wine-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary-wine); margin-bottom: 0.5rem; }
+        .wine-price { font-size: 1.5rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 1rem; }
+        .wine-specs { display: flex; gap: 15px; margin-top: 15px; font-size: 0.9rem; color: var(--gray); border-top: 1px solid #eee; padding-top: 15px; }
 
-        .hero-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            margin-bottom: 1.5rem;
-        }
+        /* CONTACT & FOOTER */
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        input, textarea { width: 100%; padding: 1rem; border: 2px solid #e5e7eb; border-radius: 12px; margin-top: 0.5rem; }
+        .btn { background: var(--primary-wine); color: white; padding: 1rem 2.5rem; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn:hover { background: var(--primary-gold); transform: translateY(-2px); }
 
-        .cta-hero {
-            display: inline-block;
-            background: var(--primary-gold);
-            color: white;
-            padding: 1.2rem 3rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        /* SECTIONS GENERAL */
-        section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        /* TERROIR SECTION */
-        .terroir {
-            background: var(--dark);
-            color: white;
-            border-radius: 30px;
-            margin: 50px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 60px;
-        }
-
-        .terroir-item i { color: var(--primary-gold); font-size: 2.5rem; margin-bottom: 1rem; }
-
-        /* WINE CARDS */
-        .wines-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .wine-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            transition: 0.4s;
-        }
-
-        .wine-card:hover { transform: translateY(-10px); }
-
-        .wine-img {
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .wine-info { padding: 2rem; }
-
-        /* FORMULAIRE */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .btn-submit {
-            background: var(--primary-wine);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            width: 100%;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* ANIMATIONS */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        footer { background: var(--dark); color: white; padding: 5rem 5% 2rem; text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 1.5rem; }
+        .social-links a { color: var(--primary-gold); }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 70px; left: 0; width: 100%;
-                background: white; flex-direction: column;
-                padding: 2rem; text-align: center;
-            }
-            .nav-links.active { display: flex; }
             .hamburger { display: flex; }
-            .contact-container { grid-template-columns: 1fr; }
+            .nav-links { position: fixed; left: -100%; top: 70px; flex-direction: column; background: white; width: 100%; padding: 2rem; transition: 0.3s; }
+            .nav-links.active { left: 0; }
+            .about-content, .contact-content { grid-template-columns: 1fr; }
         }
+
+        /* ANIMATIONS */
+        .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -218,100 +89,120 @@
     <header>
         <nav>
             <a href="#" class="logo">Domaine Vigneron</a>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-            <ul class="nav-links" id="nav-links">
+            <ul class="nav-links" id="navMenu">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#about">Le Domaine</a></li>
                 <li><a href="#wines">Nos Vins</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
         </nav>
     </header>
 
     <section id="accueil" class="hero">
         <div class="hero-content fade-in">
-            <h1>L'Esprit du Terroir</h1>
-            <p>Depuis 1925, l'excellence de nos cépages au service de vos émotions.</p>
-            <a href="#wines" class="cta-hero">Découvrir nos cuvées</a>
+            <h1>Domaine Vigneron</h1>
+            <p>Vins d'exception issus de nos plus beaux terroirs. Tradition familiale depuis 1925.</p>
+            <a href="#wines" class="btn" style="width: auto; display: inline-block;">Découvrir nos vins</a>
         </div>
     </section>
 
-    <section id="terroir">
-        <div class="terroir fade-in">
-            <div class="terroir-item">
-                <i class="fas fa-sun"></i>
-                <h3>Ensoleillement</h3>
-                <p>300 jours de soleil par an pour une maturité optimale.</p>
+    <section id="about">
+        <h2 class="section-title fade-in">Notre Histoire</h2>
+        <div class="about-content">
+            <div class="fade-in">
+                <h3>Une Passion Familiale</h3>
+                <p>Depuis trois générations, nous travaillons la terre avec respect pour extraire le meilleur de nos cépages. Nos 45 hectares sont cultivés en agriculture raisonnée.</p>
+                <div class="stats">
+                    <div class="stat"><span class="stat-number">1925</span><span class="stat-label">Création</span></div>
+                    <div class="stat"><span class="stat-number">45 ha</span><span class="stat-label">Vignoble</span></div>
+                    <div class="stat"><span class="stat-number">12</span><span class="stat-label">Cépages</span></div>
+                </div>
             </div>
-            <div class="terroir-item">
-                <i class="fas fa-mountain"></i>
-                <h3>Sols Calcaire</h3>
-                <p>Une minéralité unique qui forge le caractère de nos blancs.</p>
-            </div>
-            <div class="terroir-item">
-                <i class="fas fa-leaf"></i>
-                <h3>Culture Bio</h3>
-                <p>Zéro pesticide. Respect total de la biodiversité locale.</p>
-            </div>
+            <div class="about-image fade-in"></div>
         </div>
     </section>
 
-    <section id="wines">
-        <h2 class="section-title fade-in">Nos Vins d'Exception</h2>
+    <section id="wines" style="background: var(--light);">
+        <h2 class="section-title fade-in">Nos Vins</h2>
         <div class="wines-grid">
             <div class="wine-card fade-in">
-                <div class="wine-img" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800');"></div>
-                <div class="wine-info">
-                    <h3>Cuvée Héritage</h3>
-                    <p style="color:var(--primary-gold); font-weight:700;">45,00 €</p>
-                    <p>Un rouge charpenté, élevé 18 mois en fûts de chêne.</p>
+                <div class="wine-image" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800');"></div>
+                <div class="wine-content">
+                    <h3 class="wine-title">Cuvée Prestige</h3>
+                    <div class="wine-price">45€</div>
+                    <p>Un Merlot 100% puissant, élevé 18 mois en fûts de chêne.</p>
+                    <div class="wine-specs">
+                        <span><i class="fas fa-wine-glass"></i> Rouge</span>
+                        <span><i class="fas fa-thermometer-half"></i> 16°C</span>
+                    </div>
                 </div>
             </div>
             <div class="wine-card fade-in">
-                <div class="wine-img" style="background-image: url('https://images.unsplash.com/photo-1553184658-4448514a946e?q=80&w=800');"></div>
-                <div class="wine-info">
-                    <h3>Éclat Minéral</h3>
-                    <p style="color:var(--primary-gold); font-weight:700;">32,00 €</p>
-                    <p>Un blanc vif, notes de fleurs blanches et d'agrumes.</p>
+                <div class="wine-image" style="background-image: url('https://images.unsplash.com/photo-1553184658-4448514a946e?q=80&w=800');"></div>
+                <div class="wine-content">
+                    <h3 class="wine-title">Réserve du Domaine</h3>
+                    <div class="wine-price">32€</div>
+                    <p>Assemblage Cabernet et Syrah, aux notes de fruits noirs et d'épices.</p>
+                    <div class="wine-specs">
+                        <span><i class="fas fa-wine-glass"></i> Rouge</span>
+                        <span><i class="fas fa-thermometer-half"></i> 17°C</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title fade-in">Nous Contacter</h2>
-        <div class="contact-container fade-in">
-            <div>
-                <h3>Venez nous voir</h3>
-                <p>12 rue du Vignoble, 33000 Bordeaux</p>
+        <h2 class="section-title fade-in">Contactez-nous</h2>
+        <div class="contact-content">
+            <div class="fade-in">
+                <h3>Vignoble & Chai</h3>
+                <p>12 route du Terroir, 33000 Bordeaux</p>
                 <p><i class="fas fa-phone"></i> 05 56 00 00 00</p>
                 <p><i class="fas fa-envelope"></i> contact@domainevigneron.fr</p>
+                <div class="social-links" style="justify-content: flex-start;">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
             </div>
-            <form>
-                <input type="text" placeholder="Nom complet" required>
-                <input type="email" placeholder="Votre Email" required>
-                <textarea rows="5" placeholder="Votre message"></textarea>
-                <button type="submit" class="btn-submit">Envoyer le message</button>
+            <form class="fade-in">
+                <div class="form-group"><input type="text" placeholder="Votre Nom" required></div>
+                <div class="form-group"><input type="email" placeholder="Votre Email" required></div>
+                <div class="form-group"><textarea rows="5" placeholder="Votre Message"></textarea></div>
+                <button type="submit" class="btn">Envoyer</button>
             </form>
         </div>
     </section>
 
-    <footer style="background:var(--dark); color:white; padding: 3rem; text-align:center;">
-        <p>&copy; 2026 Domaine Vigneron - L'abus d'alcool est dangereux pour la santé.</p>
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4 style="color: var(--primary-gold);">Domaine Vigneron</h4>
+                <p>L'excellence du vin français depuis trois générations.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--primary-gold);">Liens</h4>
+                <p><a href="#about" style="color: white; text-decoration: none;">Le Domaine</a></p>
+                <p><a href="#wines" style="color: white; text-decoration: none;">Nos Vins</a></p>
+            </div>
+            <div>
+                <h4 style="color: var(--primary-gold);">Newsletter</h4>
+                <input type="email" placeholder="Email" style="background: transparent; border: 1px solid #444; color: white;">
+            </div>
+        </div>
+        <p style="opacity: 0.5; border-top: 1px solid #333; padding-top: 2rem;">&copy; 2026 Domaine Vigneron - L'abus d'alcool est dangereux pour la santé.</p>
     </footer>
 
     <script>
-        // Menu Mobile Toggle
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
+        // Hamburger Menu
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Scroll Animation
+        // Scroll Animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');

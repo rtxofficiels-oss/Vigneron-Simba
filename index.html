@@ -1,8 +1,3 @@
-NICEEEEEE VIGNERON
-
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,7 +14,17 @@ NICEEEEEE VIGNERON
             --text: #222;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Désactivation de la sélection de texte */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            user-select: none; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+        }
+
         html { scroll-behavior: smooth; }
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -338,7 +343,6 @@ NICEEEEEE VIGNERON
                     Nom du lieu : Marlowe Vineyards<br>
                     Adresse : Buen Vino Road, Tongva Hills<br>
                     Région : Los Santos County, San Andreas<br>
-                
                 </p>
             </div>
             <form>
@@ -358,7 +362,6 @@ NICEEEEEE VIGNERON
                     <input type="raison" id="raison" placeholder=" ">
                     <label for="raison">information complémentaires</label>
                 </div>
-                
                 <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
             </form>
         </div>
@@ -370,6 +373,9 @@ NICEEEEEE VIGNERON
     </footer>
 
     <script>
+        // Désactiver le clic droit
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {

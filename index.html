@@ -3,169 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Vigneron - Boutique & Cave</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <title>Maison Vigneron - Cave Prestige</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --matteri-wine: #4A0E0E;
             --matteri-gold: #b3936a;
             --bg-site: #fdfdfc;
-            --text: #222;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg-site); 
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-        }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg-site); color: #222; }
 
-        /* NAVBAR TRANSULCIDE PUIS BLANCHE */
-        header { 
-            position: fixed; top: 0; width: 100%; 
-            background: white; 
-            z-index: 2000; 
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        nav { 
-            max-width: 1400px; margin: 0 auto; 
-            display: flex; justify-content: space-between; 
-            align-items: center; padding: 1.2rem 5%; 
-        }
-        .logo { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.6rem; font-weight: 600; 
-            color: var(--matteri-wine); 
-            text-decoration: none; text-transform: uppercase; letter-spacing: 3px;
-        }
+        /* HEADER */
+        header { position: fixed; top: 0; width: 100%; background: white; z-index: 2000; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--matteri-wine); text-decoration: none; text-transform: uppercase; letter-spacing: 3px; }
         .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-links a { 
-            color: var(--text); text-decoration: none; 
-            font-size: 0.75rem; font-weight: 500; 
-            text-transform: uppercase; letter-spacing: 2px;
-            transition: 0.3s;
-        }
-        .nav-links a:hover { color: var(--matteri-gold); }
+        .nav-links a { color: #222; text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* HERO - IMAGE DE FOND ÉCRAN TOTAL */
+        /* HERO */
         .hero { 
             height: 100vh; 
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover; 
-            background-position: center; 
-            display: flex; align-items: center; justify-content: center; 
-            text-align: center; color: white;
-            padding: 0 5%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover; background-position: center; 
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
         }
-        .hero-content h1 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(3rem, 12vw, 7rem); font-weight: 300; 
-            line-height: 1; margin-bottom: 2rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-        }
-        .btn-discover {
-            padding: 1.2rem 3rem;
-            border: 1px solid white;
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            transition: 0.5s ease;
-        }
-        .btn-discover:hover { background: white; color: black; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 6rem); font-weight: 300; }
 
-        /* SECTION CAVE / PRODUITS */
-        .cave-section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
-        .cave-header { text-align: center; margin-bottom: 80px; }
-        .cave-header h2 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 3.5rem; font-weight: 400; margin-bottom: 1rem;
-        }
-        .filter-nav { 
-            display: flex; justify-content: center; gap: 2rem; margin-bottom: 50px;
-            text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;
-        }
-        .filter-nav span { cursor: pointer; color: #888; transition: 0.3s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
-        .filter-nav span.active { color: var(--matteri-wine); border-bottom: 1px solid var(--matteri-wine); }
+        /* SECTION CAVE & FILTRES */
+        .cave-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .cave-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; margin-bottom: 40px; }
 
-        /* GRILLE DE PRODUITS */
-        .products-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 5rem 3rem; 
+        .filter-nav { display: flex; justify-content: center; gap: 2rem; margin-bottom: 60px; flex-wrap: wrap; }
+        .filter-btn { 
+            cursor: pointer; color: #888; text-transform: uppercase; font-size: 0.75rem; 
+            letter-spacing: 2px; padding-bottom: 5px; border-bottom: 2px solid transparent;
+            transition: 0.3s;
         }
-        .product-card { text-align: center; position: relative; }
+        .filter-btn.active { color: var(--matteri-wine); border-bottom: 2px solid var(--matteri-wine); }
+
+        /* GRILLE DE PRODUITS - FIX DÉCALAGE IMAGE */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 4rem; }
+        
+        /* Cacher les produits filtrés */
+        .product-card { display: block; transition: 0.4s ease-in-out; }
+        .product-card.hidden { display: none; }
+
         .product-image-box {
             background: #f7f7f5;
-            padding: 60px 20px;
-            margin-bottom: 30px;
-            border-radius: 2px;
-            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: pointer;
-            display: flex; justify-content: center;
+            height: 450px; /* Hauteur fixe pour le cadre */
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Empêche l'image de dépasser */
+            border-radius: 4px;
         }
+
         .product-image-box img { 
-            height: 450px; 
-            object-fit: contain; 
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-            transition: 0.6s;
+            max-height: 85%; /* L'image prend 85% de la hauteur du cadre max */
+            max-width: 85%;
+            object-fit: contain; /* Garde les proportions sans déformer */
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .product-card:hover .product-image-box { background: #efefed; }
-        .product-card:hover img { transform: scale(1.08) translateY(-10px); }
+
+        .product-card:hover img { transform: scale(1.1); }
         
-        .product-info h3 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.8rem; font-weight: 500; margin-bottom: 8px;
-        }
-        .product-type { 
-            display: block; font-size: 0.7rem; text-transform: uppercase; 
-            letter-spacing: 2px; color: var(--matteri-gold); margin-bottom: 15px; 
-        }
-        .product-price { font-size: 1.1rem; font-weight: 400; color: #555; }
+        .product-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 5px; }
+        .product-type { color: var(--matteri-gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        .product-price { font-weight: 400; color: #666; }
 
-        /* CONTACT STYLE MATTERI */
-        .contact-container {
-            background: white;
-            padding: 100px 5%;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
-            max-width: 1400px; margin: 0 auto;
-        }
-        .contact-info h2 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 30px; }
-        .form-row { position: relative; margin-bottom: 40px; }
-        .form-row input, .form-row textarea {
-            width: 100%; padding: 10px 0;
-            border: none; border-bottom: 1px solid #ddd;
-            background: transparent; outline: none;
-            font-family: inherit; font-size: 0.9rem;
-        }
-        .form-row label {
-            position: absolute; top: 10px; left: 0;
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
-            color: #999; pointer-events: none; transition: 0.3s;
-        }
-        input:focus + label, input:not(:placeholder-shown) + label {
-            top: -15px; font-size: 0.6rem; color: var(--matteri-wine);
-        }
-
-        footer { 
-            background: #111; color: white; padding: 80px 5% 40px; text-align: center;
-        }
-        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; letter-spacing: 5px; margin-bottom: 40px; display: block; }
-        .legal { font-size: 0.65rem; color: #555; margin-top: 50px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* REVEAL ON SCROLL */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 900px) {
-            .contact-container { grid-template-columns: 1fr; gap: 50px; }
-            .nav-links { display: none; }
-        }
+        footer { background: #111; color: white; padding: 60px 5%; text-align: center; margin-top: 100px; }
     </style>
 </head>
 <body>
@@ -176,132 +86,102 @@
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#la-cave">La Cave</a></li>
-                <li><a href="#histoire">L'Histoire</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="accueil" class="hero">
-        <div class="hero-content">
-            <h1 class="reveal">Domaine de<br>l'Excellence</h1>
-            <a href="#la-cave" class="btn-discover reveal">Explorer la cave</a>
-        </div>
+        <h1>L'Esprit du Terroir</h1>
     </section>
 
     <section id="la-cave" class="cave-section">
-        <div class="cave-header reveal">
-            <h2>Nos Alcools & Vins</h2>
-            <div class="filter-nav">
-                <span class="active">Tous les produits</span>
-                <span>Vins Rouges</span>
-                <span>Vins Blancs</span>
-                <span>Spiritueux</span>
-            </div>
+        <h2>Nos Alcools & Vins</h2>
+        
+        <div class="filter-nav">
+            <span class="filter-btn active" data-filter="all">Tous les produits</span>
+            <span class="filter-btn" data-filter="rouge">Vins Rouges</span>
+            <span class="filter-btn" data-filter="blanc">Vins Blancs</span>
+            <span class="filter-btn" data-filter="spiritueux">Spiritueux</span>
         </div>
 
-        <div class="products-grid">
-            <div class="product-card reveal">
+        <div class="products-grid" id="productGrid">
+            
+            <div class="product-card" data-category="rouge">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Vin Rouge">
+                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800" alt="Vin Rouge">
                 </div>
                 <div class="product-info">
-                    <span class="product-type">Cuvée Tradition • 2021</span>
-                    <h3>Le Grand Rouge</h3>
-                    <p class="product-price">42,00 €</p>
+                    <span class="product-type">Rouge • 2021</span>
+                    <h3>Le Grand Héritage</h3>
+                    <p class="product-price">38,00 €</p>
                 </div>
             </div>
 
-            <div class="product-card reveal">
+            <div class="product-card" data-category="blanc">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1553184658-4448514a946e?q=80&w=800&auto=format&fit=crop" alt="Vin Blanc">
+                    <img src="https://images.unsplash.com/photo-1553184658-4448514a946e?q=80&w=800" alt="Vin Blanc">
                 </div>
                 <div class="product-info">
-                    <span class="product-type">Minéral • Millésime</span>
-                    <h3>Blanc de Blancs</h3>
-                    <p class="product-price">35,00 €</p>
+                    <span class="product-type">Blanc • Frais</span>
+                    <h3>Éclat de Calcaire</h3>
+                    <p class="product-price">29,00 €</p>
                 </div>
             </div>
 
-            <div class="product-card reveal">
+            <div class="product-card" data-category="spiritueux">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1527281400828-ac7378ff044b?q=80&w=800&auto=format&fit=crop" alt="Spiritueux">
+                    <img src="https://images.unsplash.com/photo-1527281400828-ac7378ff044b?q=80&w=800" alt="Spiritueux">
                 </div>
                 <div class="product-info">
-                    <span class="product-type">Cognac • Hors d'âge</span>
-                    <h3>L'Élixir du Fondateur</h3>
-                    <p class="product-price">125,00 €</p>
+                    <span class="product-type">Cognac • Rare</span>
+                    <h3>L'Élixir Doré</h3>
+                    <p class="product-price">115,00 €</p>
                 </div>
             </div>
 
-            <div class="product-card reveal">
+            <div class="product-card" data-category="rouge">
                 <div class="product-image-box">
-                    <img src="https://images.unsplash.com/photo-1566754436893-983a4789439b?q=80&w=800&auto=format&fit=crop" alt="Rosé">
+                    <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=800" alt="Rouge 2">
                 </div>
                 <div class="product-info">
-                    <span class="product-type">Gourmand • Frais</span>
-                    <h3>Rosé d'Été</h3>
-                    <p class="product-price">18,00 €</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" style="background: white;">
-        <div class="contact-container reveal">
-            <div class="contact-info">
-                <h2>Nous rendre<br>visite au Domaine</h2>
-                <p style="color: #666; margin-bottom: 40px; font-weight: 300; line-height: 2;">
-                    Vignoble de 45 hectares situé au coeur de la région.<br>
-                    Ouvert du Lundi au Vendredi pour des dégustations.<br><br>
-                    12 Route des Grands Crus, Bordeaux<br>
-                    contact@maisonvigneron.fr
-                </p>
-                <div style="font-size: 1.2rem; display: flex; gap: 25px;">
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-facebook-f"></i>
+                    <span class="product-type">Rouge • Puissant</span>
+                    <h3>Réserve du Chai</h3>
+                    <p class="product-price">45,00 €</p>
                 </div>
             </div>
 
-            <form>
-                <div class="form-row">
-                    <input type="text" id="name" placeholder=" ">
-                    <label for="name">Nom complet</label>
-                </div>
-                <div class="form-row">
-                    <input type="email" id="email" placeholder=" ">
-                    <label for="email">Adresse Email</label>
-                </div>
-                <div class="form-row">
-                    <textarea id="msg" rows="4" placeholder=" "></textarea>
-                    <label for="msg">Votre message</label>
-                </div>
-                <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
-            </form>
         </div>
     </section>
 
     <footer>
-        <span class="footer-logo">MAISON VIGNERON</span>
-        <p style="font-weight: 300; font-size: 0.8rem; letter-spacing: 2px;">DEPUIS 1925</p>
-        <p class="legal">L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</p>
+        <p>MAISON VIGNERON © 2026</p>
+        <p style="font-size: 0.6rem; margin-top: 20px; opacity: 0.5;">L'ABUS D'ALCOOL EST DANGEREUX POUR LA SANTÉ.</p>
     </footer>
 
     <script>
-        // Gestion de l'animation au scroll
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        window.addEventListener("load", reveal); // Pour animer le hero dès le départ
+        // LOGIQUE DES ONGLETS (FILTRES)
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const products = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 1. Gérer l'état actif des boutons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // 2. Filtrer les produits
+                const filterValue = btn.getAttribute('data-filter');
+
+                products.forEach(product => {
+                    if (filterValue === 'all' || product.getAttribute('data-category') === filterValue) {
+                        product.classList.remove('hidden');
+                    } else {
+                        product.classList.add('hidden');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

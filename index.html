@@ -163,7 +163,7 @@
         
         .product-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 500; margin-bottom: 8px; }
         .product-type { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--matteri-gold); margin-bottom: 15px; }
-        .product-price { font-size: 1.1rem; font-weight: 400; color: #555; }
+        .product-price { font-size: 1.1rem; font-weight: 400; color: #555; margin-bottom: 15px; }
 
         .contact-container {
             background: white; padding: 100px 5%;
@@ -185,6 +185,78 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* --- NOUVEAUX STYLES PANIER --- */
+        .btn-add-cart {
+            background: var(--matteri-wine);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-add-cart:hover { background: var(--matteri-gold); }
+
+        #cart-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--matteri-wine);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 3000;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        #cart-icon:hover { transform: scale(1.1); }
+        #cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--matteri-gold);
+            font-size: 0.7rem;
+            padding: 3px 7px;
+            border-radius: 50%;
+        }
+
+        #cart-modal {
+            position: fixed;
+            top: 0; right: -400px;
+            width: 350px; height: 100vh;
+            background: white;
+            z-index: 4000;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: 0.5s ease;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        #cart-modal.active { right: 0; }
+        .cart-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cart-items { flex-grow: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.8rem; }
+        .btn-order-final {
+            background: black;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            margin-top: 20px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        /* --- FIN STYLES PANIER --- */
+
         @media (max-width: 900px) {
             .category-selector { grid-template-columns: 1fr; }
             .contact-container { grid-template-columns: 1fr; gap: 50px; }
@@ -204,6 +276,20 @@
             </ul>
         </nav>
     </header>
+
+    <div id="cart-icon" onclick="toggleCart()">
+        <i class="fas fa-shopping-basket"></i>
+        <span id="cart-count">0</span>
+    </div>
+
+    <div id="cart-modal">
+        <h2 class="cart-title">Votre Panier</h2>
+        <div class="cart-items" id="cart-items-list">
+            </div>
+        <div id="cart-total" style="font-weight: 600; margin-top: 10px;">Total: 0,00 $</div>
+        <button class="btn-order-final" onclick="sendOrder()">Passer la commande</button>
+        <p onclick="toggleCart()" style="text-align: center; margin-top: 15px; font-size: 0.7rem; cursor: pointer; text-decoration: underline;">Fermer</p>
+    </div>
 
     <section id="accueil" class="hero">
         <div class="hero-content">
@@ -247,7 +333,8 @@
                 <div class="product-info">
                     <span class="product-type">Cuvée Tradition • 2021</span>
                     <h3>Le Grand Rouge</h3>
-                    <p class="product-price">42,00 $</p>
+                    <p class="product-price">42.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Le Grand Rouge', 42.00)">Commander</button>
                 </div>
             </div>
             <div class="product-card" data-category="rouge">
@@ -257,7 +344,8 @@
                 <div class="product-info">
                     <span class="product-type">Réserve Spéciale • 2018</span>
                     <h3>Château des Lys</h3>
-                    <p class="product-price">58,00 $</p>
+                    <p class="product-price">58.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Château des Lys', 58.00)">Commander</button>
                 </div>
             </div>
             <div class="product-card" data-category="rouge">
@@ -267,7 +355,8 @@
                 <div class="product-info">
                     <span class="product-type">Vignoble d'Exception • 2020</span>
                     <h3>L'Âme du Terroir</h3>
-                    <p class="product-price">34,00 $</p>
+                    <p class="product-price">34.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('L\'Âme du Terroir', 34.00)">Commander</button>
                 </div>
             </div>
 
@@ -278,7 +367,8 @@
                 <div class="product-info">
                     <span class="product-type">Minéral • Millésime</span>
                     <h3>Blanc de Blancs</h3>
-                    <p class="product-price">35,00 $</p>
+                    <p class="product-price">35.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Blanc de Blancs', 35.00)">Commander</button>
                 </div>
             </div>
             <div class="product-card" data-category="blanc">
@@ -288,7 +378,8 @@
                 <div class="product-info">
                     <span class="product-type">Floral • Fruité</span>
                     <h3>Chardonnay Prestige</h3>
-                    <p class="product-price">29,00 $</p>
+                    <p class="product-price">29.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Chardonnay Prestige', 29.00)">Commander</button>
                 </div>
             </div>
             <div class="product-card" data-category="blanc">
@@ -298,7 +389,8 @@
                 <div class="product-info">
                     <span class="product-type">Sauvignon • Sec</span>
                     <h3>Éclat du Matin</h3>
-                    <p class="product-price">24,00 $</p>
+                    <p class="product-price">24.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Éclat du Matin', 24.00)">Commander</button>
                 </div>
             </div>
 
@@ -309,7 +401,8 @@
                 <div class="product-info">
                     <span class="product-type">Cognac • Hors d'âge</span>
                     <h3>L'Élixir du Fondateur</h3>
-                    <p class="product-price">125,00 $</p>
+                    <p class="product-price">125.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('L\'Élixir du Fondateur', 125.00)">Commander</button>
                 </div>
             </div>
             <div class="product-card" data-category="spiritueux">
@@ -319,7 +412,8 @@
                 <div class="product-info">
                     <span class="product-type">Single Malt • 12 ans</span>
                     <h3>Whisky des Landes</h3>
-                    <p class="product-price">85,00 $</p>
+                    <p class="product-price">85.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Whisky des Landes', 85.00)">Commander</button>
                 </div>
             </div>
             <div class="product-card" data-category="spiritueux">
@@ -329,7 +423,8 @@
                 <div class="product-info">
                     <span class="product-type">Gin Artisanal • Botanique</span>
                     <h3>Le Gin du Domaine</h3>
-                    <p class="product-price">49,00 $</p>
+                    <p class="product-price">49.00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Le Gin du Domaine', 49.00)">Commander</button>
                 </div>
             </div>
         </div>
@@ -345,21 +440,21 @@
                     Région : Los Santos County, San Andreas<br>
                 </p>
             </div>
-            <form>
+            <form id="mainContactForm">
                 <div class="form-row">
-                    <input type="text" id="name" placeholder=" ">
+                    <input type="text" id="name" placeholder=" " required>
                     <label for="name">Nom Prénom</label>
                 </div>
                 <div class="form-row">
-                    <input type="email" id="email" placeholder=" ">
+                    <input type="email" id="email" placeholder=" " required>
                     <label for="email">Adresse Email</label>
                 </div>
                 <div class="form-row">
-                    <input type="numero" id="numero" placeholder=" ">
+                    <input type="text" id="numero" placeholder=" ">
                     <label for="numero">numero de télephone ig</label>
                 </div>
                 <div class="form-row">
-                    <input type="raison" id="raison" placeholder=" ">
+                    <input type="text" id="raison" placeholder=" ">
                     <label for="raison">information complémentaires</label>
                 </div>
                 <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
@@ -427,6 +522,27 @@
                 filterByCat(btn.getAttribute('data-filter'));
             });
         });
-    </script>
-</body>
-</html>
+
+        // --- LOGIQUE DU PANIER ---
+        let cart = [];
+        const DISCORD_WEBHOOK = "TON_WEBHOOK_URL_ICI";
+
+        function toggleCart() {
+            document.getElementById('cart-modal').classList.toggle('active');
+        }
+
+        function addToCart(name, price) {
+            const index = cart.findIndex(item => item.name === name);
+            if (index > -1) {
+                cart[index].qty++;
+            } else {
+                cart.push({ name: name, price: price, qty: 1 });
+            }
+            updateCartUI();
+            // Animation du panier pour montrer l'ajout
+            document.getElementById('cart-icon').style.transform = 'scale(1.3)';
+            setTimeout(() => document.getElementById('cart-icon').style.transform = 'scale(1)', 200);
+        }
+
+        function updateCartUI() {
+            const list = document

@@ -120,6 +120,21 @@
         .item-qty { display: flex; align-items: center; gap: 10px; }
         .qty-btn { cursor: pointer; width: 20px; height: 20px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
 
+        /* Formulaire Panier */
+        .cart-user-info {
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            display: none;
+        }
+        .cart-user-info input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            font-size: 0.8rem;
+        }
+
         .cart-footer { border-top: 1px solid #eee; padding-top: 20px; }
         .cart-total { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 20px; }
         .btn-checkout {
@@ -341,6 +356,12 @@
         <div class="cart-items" id="cartItems">
             <p style="text-align: center; color: #999; margin-top: 50px;">Votre panier est vide</p>
         </div>
+        
+        <div class="cart-user-info" id="cartUserInfo">
+            <input type="text" id="order-name" placeholder="Nom et Prénom">
+            <input type="tel" id="order-phone" placeholder="Numéro de téléphone">
+        </div>
+
         <div class="cart-footer">
             <div class="cart-total">
                 <span>TOTAL</span>
@@ -526,11 +547,11 @@
                     <label for="email">Adresse Email</label>
                 </div>
                 <div class="form-row">
-                    <input type="numero" id="numero" placeholder=" ">
+                    <input type="text" id="numero" placeholder=" ">
                     <label for="numero">numero de télephone ig</label>
                 </div>
                 <div class="form-row">
-                    <input type="raison" id="raison" placeholder=" ">
+                    <input type="text" id="raison" placeholder=" ">
                     <label for="raison">information complémentaires</label>
                 </div>
                 <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
@@ -582,6 +603,7 @@
             const container = document.getElementById('cartItems');
             const countBadge = document.getElementById('cart-count');
             const totalDisplay = document.getElementById('totalPrice');
+            const userInfo = document.getElementById('cartUserInfo');
             
             container.innerHTML = '';
             let total = 0;
@@ -589,6 +611,9 @@
 
             if (cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #999; margin-top: 50px;">Votre panier est vide</p>';
+                userInfo.style.display = 'none';
+            } else {
+                userInfo.style.display = 'block';
             }
 
             cart.forEach(item => {
@@ -617,6 +642,13 @@
         function validerCommande() {
             if (cart.length === 0) return alert("Le panier est vide !");
 
+            const userName = document.getElementById('order-name').value;
+            const userPhone = document.getElementById('order-phone').value;
+
+            if (!userName || !userPhone) {
+                return alert("Veuillez remplir votre nom et votre numéro de téléphone avant de valider.");
+            }
+
             let itemsTxt = cart.map(i => `- **${i.name}** (x${i.qty}) : ${i.price * i.qty}$`).join('\n');
             let totalTxt = document.getElementById('totalPrice').innerText;
 
@@ -626,7 +658,11 @@
                     title: "🛒 Nouvelle Commande Panier",
                     color: 4853262,
                     description: itemsTxt,
-                    fields: [{ name: "Total", value: `**${totalTxt}**` }],
+                    fields: [
+                        { name: "Client", value: userName, inline: true },
+                        { name: "Téléphone", value: userPhone, inline: true },
+                        { name: "Total", value: `**${totalTxt}**`, inline: false }
+                    ],
                     footer: { text: "Commande à traiter" }
                 }]
             };
@@ -638,6 +674,8 @@
             }).then(() => {
                 alert("Commande envoyée avec succès !");
                 cart = [];
+                document.getElementById('order-name').value = "";
+                document.getElementById('order-phone').value = "";
                 updateCartUI();
                 toggleCart();
             });

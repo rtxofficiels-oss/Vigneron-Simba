@@ -338,7 +338,7 @@
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#la-cave">La Cave</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Nous Rejoindres</a></li>
                 <li class="cart-icon-wrapper" onclick="toggleCart()">
                     <i class="fas fa-shopping-basket"></i>
                     <span id="cart-count">0</span>
@@ -539,20 +539,20 @@
             </div>
             <form id="contactForm">
                 <div class="form-row">
-                    <input type="text" id="name" placeholder=" ">
-                    <label for="name">Nom Prénom</label>
+                    <input type="text" id="contact-name" placeholder=" " required>
+                    <label for="contact-name">Nom Prénom</label>
                 </div>
                 <div class="form-row">
-                    <input type="email" id="email" placeholder=" ">
-                    <label for="email">Adresse Email</label>
+                    <input type="email" id="contact-email" placeholder=" " required>
+                    <label for="contact-email">Adresse Email</label>
                 </div>
                 <div class="form-row">
-                    <input type="text" id="numero" placeholder=" ">
-                    <label for="numero">numero de télephone ig</label>
+                    <input type="text" id="contact-phone" placeholder=" " required>
+                    <label for="contact-phone">numero de télephone ig</label>
                 </div>
                 <div class="form-row">
-                    <input type="text" id="raison" placeholder=" ">
-                    <label for="raison">information complémentaires</label>
+                    <input type="text" id="contact-reason" placeholder=" ">
+                    <label for="contact-reason">information complémentaires</label>
                 </div>
                 <button type="submit" class="btn-discover" style="background: black; border: none; width: 100%; cursor: pointer;">Envoyer</button>
             </form>
@@ -565,8 +565,46 @@
     </footer>
 
     <script>
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1491483454288826440/qZ5bHMBQzLEMfGyQQkXOlw_R7Dpu0odls6XhuYJ8gNE-gj2kDGcqaCLxkYppXrX2IuC8";
+        // --- CONFIGURATION WEBHOOKS ---
+        const WEBHOOK_COMMANDE = "https://discord.com/api/webhooks/1491483454288826440/qZ5bHMBQzLEMfGyQQkXOlw_R7Dpu0odls6XhuYJ8gNE-gj2kDGcqaCLxkYppXrX2IuC8";
+        // REMPLACEZ L'URL CI-DESSOUS PAR UNE AUTRE SI VOUS VOULEZ UN SALON DIFFERENT :
+        const WEBHOOK_CONTACT = "https://discord.com/api/webhooks/1491492451972681742/T83zVBRZ7tshfSW11rewUtkavCi_GfKKGBtA2YVVn41jsc0e2U7a_VDpxRDygsiLsbvN";
+        
         let cart = [];
+
+        // --- LOGIQUE ENVOI CONTACT ---
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            const reason = document.getElementById('contact-reason').value || "Non précisé";
+
+            const data = {
+                username: "Contact Client - Maison Vigneron",
+                embeds: [{
+                    title: "✉️ Nouveau message de contact",
+                    color: 3447003, // Bleu
+                    fields: [
+                        { name: "Client", value: name, inline: true },
+                        { name: "Email", value: email, inline: true },
+                        { name: "Téléphone", value: phone, inline: true },
+                        { name: "Compléments", value: reason, inline: false }
+                    ],
+                    timestamp: new Date()
+                }]
+            };
+
+            fetch(WEBHOOK_CONTACT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert("Votre message a été envoyé !");
+                document.getElementById('contactForm').reset();
+            });
+        });
 
         // UI Toggle Panier
         function toggleCart() {
@@ -656,7 +694,7 @@
                 username: "Boutique Maison Vigneron",
                 embeds: [{
                     title: "🛒 Nouvelle Commande Panier",
-                    color: 4853262,
+                    color: 4853262, // Rouge Vin
                     description: itemsTxt,
                     fields: [
                         { name: "Client", value: userName, inline: true },
@@ -667,7 +705,7 @@
                 }]
             };
 
-            fetch(WEBHOOK_URL, {
+            fetch(WEBHOOK_COMMANDE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -701,7 +739,6 @@
             catSelector.style.display = 'none'; 
             filterNav.style.display = 'flex'; 
             
-            // AJOUT : Met à jour le soulignement (classe 'active')
             document.querySelectorAll('.filter-nav span[data-filter]').forEach(s => s.classList.remove('active'));
             const activeLink = document.querySelector(`.filter-nav span[data-filter="${cat}"]`);
             if(activeLink) activeLink.classList.add('active');
